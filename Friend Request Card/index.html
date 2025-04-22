@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Escape Button Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+  <h2>Do you want to be my friend</h2>
+  <div class="buttons-container">
+    <button class="btn accept-btn" onclick="acceptAction()">Accept</button>
+    <button class="btn reject-btn" id="reject-btn">Reject</button>
+  </div>
+  <div class="message" id="success-message">
+  O Wao We are now friends🤗😍🥰
+  </div>
+</div>
+
+<script>
+  const rejectBtn = document.getElementById('reject-btn');
+  let isPositioned = false;
+
+  rejectBtn.addEventListener('click', function() {
+    if (!isPositioned) {
+      // First click - switch to absolute positioning
+      this.style.position = 'absolute';
+      this.style.marginTop = '0';
+      isPositioned = true;
+    }
+    positionButtonRandomly(this);
+  });
+
+  function positionButtonRandomly(button) {
+    const btnWidth = button.offsetWidth;
+    const btnHeight = button.offsetHeight;
+    
+    // Calculate maximum positions to keep button fully visible
+    const maxX = window.innerWidth - btnWidth;
+    const maxY = window.innerHeight - btnHeight;
+    
+    // Generate random positions
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    
+    // Apply new position
+    button.style.left = `${randomX}px`;
+    button.style.top = `${randomY}px`;
+  }
+
+  function acceptAction() {
+    const message = document.getElementById('success-message');
+    message.style.display = 'block';
+    
+    // Hide message after 3 seconds
+    setTimeout(() => {
+      message.style.display = 'none';
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
+
+
